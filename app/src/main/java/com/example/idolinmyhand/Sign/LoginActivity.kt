@@ -33,8 +33,10 @@ class LoginActivity : AppCompatActivity() {
              ?.addOnCompleteListener {
                      result->
                  if(result.isSuccessful){
-                     var intent = Intent(this, MainActivity::class.java)
+                     val intent = Intent(this, MainActivity::class.java)
                      startActivity(intent)
+                 } else{
+                     Toast.makeText(this, result.exception?.message, Toast.LENGTH_LONG).show()
                  }
              }
      }
