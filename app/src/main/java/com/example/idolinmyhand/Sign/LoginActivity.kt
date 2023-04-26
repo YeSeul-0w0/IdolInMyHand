@@ -21,11 +21,18 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        // login
         auth = FirebaseAuth.getInstance()
         binding.login.setOnClickListener {
             val email = binding.email.text.toString()
             val passwd = binding.password.text.toString()
             login(email, passwd)
+        }
+
+        // sign in
+        binding.signUp.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
      fun login(email:String, password:String) {
@@ -33,18 +40,11 @@ class LoginActivity : AppCompatActivity() {
              ?.addOnCompleteListener {
                      result->
                  if(result.isSuccessful){
-                     val intent = Intent(this, MainActivity::class.java)
-                     startActivity(intent)
+                     startActivity(Intent(this, MainActivity::class.java))
                  } else{
                      Toast.makeText(this, result.exception?.message, Toast.LENGTH_LONG).show()
                  }
              }
      }
-//    fun moveMainPage(user: FirebaseUser?){
-//        if( user!= null){
-//            startActivity(Intent(this,MainActivity::class.java))
-//            finish()
-//        }
-//    }
 }
 
